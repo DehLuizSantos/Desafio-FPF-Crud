@@ -17,12 +17,18 @@
     />
     <link preload rel="stylesheet" href="src/css/style.css" />
     <link preload rel="stylesheet" href="src/css/login.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
+    />
     <title>Login Desafio FPF</title>
   </head>
 
   <body>
     <!-- Animação por trás da aplicação -->
     <div id="particles-js"></div>
+
     <!-- Container Login -->
     <div class="login-wrapper">
       <div class="card-switch">
@@ -31,47 +37,65 @@
           <input type="checkbox" class="toggle" />
           <span class="slider"></span>
           <span class="card-side"></span>
+
           <!-- Flip card container -->
           <div class="flip-card__inner">
-            <!-- Logar -->
             <div class="flip-card__front">
               <div class="title">Logar</div>
-              <form class="flip-card__form" action="">
+
+              <!-- Formulario login -->
+              <form
+                id="login-form"
+                class="flip-card__form"
+                action="dashboard.html"
+              >
                 <input
                   class="flip-card__input"
-                  name="email"
+                  name="login-email"
                   placeholder="Email"
                   type="email"
+                  required
                 />
                 <input
                   class="flip-card__input"
-                  name="password"
+                  name="login-password"
                   placeholder="Password"
                   type="password"
+                  required
                 />
-                <button class="flip-card__btn">Logar!</button>
+                <button type="submit" class="flip-card__btn">Logar!</button>
               </form>
             </div>
-            <!-- Registrar (inscrever) -->
+
             <div class="flip-card__back">
               <div class="title">Inscrever</div>
-              <form class="flip-card__form" action="">
+
+              <!-- Formulario registrar -->
+              <form
+                id="register-form"
+                class="flip-card__form"
+                action="dashboard.html"
+              >
                 <input
                   class="flip-card__input"
                   placeholder="Name"
                   type="name"
+                  name="register-name"
+                  required
                 />
                 <input
                   class="flip-card__input"
-                  name="email"
+                  name="register-email"
                   placeholder="Email"
                   type="email"
+                  required
                 />
                 <input
                   class="flip-card__input"
-                  name="password"
+                  name="register-password"
                   placeholder="Password"
                   type="password"
+                  required
                 />
                 <button class="flip-card__btn">Confirmar!</button>
               </form>
@@ -82,7 +106,8 @@
     </div>
   </body>
 
-  <script src="src/js/fetch.js"></script>
   <script src="src/js/particles.js"></script>
   <script src="src/js/app.js"></script>
+  <script src="src/js/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </html>
