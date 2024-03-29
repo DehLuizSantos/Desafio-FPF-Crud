@@ -1,31 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Desafio FPF</title>
-    <link
-      preload
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      preload
-      rel="shortcut icon"
-      href="./src/assets/img/logo-fpf.png"
-      type="image/x-icon"
-    />
-    <link preload rel="stylesheet" href="src/css/style.css" />
-    <link preload rel="stylesheet" href="src/css/login.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
-    />
-  </head>
-  <body>
-    <div id="#container"></div>
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="src/js/dashboard.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Desafio FPF</title>
+  <link preload
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+  <link preload rel="shortcut icon" href="./src/assets/img/logo-fpf.png" type="image/x-icon" />
+  <link preload rel="stylesheet" href="src/css/style.css" />
+  <link preload rel="stylesheet" href="src/css/dashboard.css" />
+</head>
+
+<body>
+  <!-- preloader
+    ================================================== -->
+  <div id="preloader">
+    <div id="loader" class="dots-fade">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+  <div id="top" class="s-wrap site-wrapper">
+    <header class="s-header">
+
+      <div class="header__top">
+        <div class="header__logo">
+          <a class="site-logo" href="index.html">
+            <img src="src/assets/img/logo-fpf.png" alt="Homepage">
+          </a>
+        </div>
+      </div>
+
+      <!-- header__top -->
+      <nav class="header__nav-wrap">
+
+        <ul class="header__nav">
+          <li class="current"><a href="index.html" title="">Usuários</a></li>
+        </ul>
+        <!-- end header__nav -->
+
+        <ul class="header__social">
+          <li class="ss-facebook">
+            <a href="https://facebook.com/">
+              <span class="screen-reader-text">Facebook</span>
+            </a>
+          </li>
+          <li class="ss-github">
+            <a href="#0">
+              <span class="screen-reader-text">GitHub</span>
+            </a>
+          </li>
+          <li class="ss-linkedin">
+            <a href="#0">
+              <span class="screen-reader-text">Linkedin</span>
+            </a>
+          </li>
+        </ul>
+
+      </nav> <!-- end header__nav-wrap -->
+
+      <!-- menu toggle -->
+      <a href="#0" class="header__menu-toggle">
+        <span>Menu</span>
+      </a>
+
+    </header>
+  </div>
+
+</body>
+<script src="src/js/jquery-3.2.1.min.js"></script>
+<script src="src/js/dashboard.js"></script>
+
 </html>
