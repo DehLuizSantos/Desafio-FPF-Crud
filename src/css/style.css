@@ -18,6 +18,18 @@
   --color-lightMagenta: #ff92d0;
   --color-blue: #3ebbd1;
   --color-darkBlue: #163f7c;
+
+  /* Spacings */
+  --space-sm: 15px;
+  --space-md: 30px;
+  --space-lg: 45px;
+  --space-xl: 60px;
+
+  /* Fonts */
+  --font-sm: 0.6rem;
+  --font-md: 0.8rem;
+  --font-lg: 1rem;
+  --font-xl: 1.2rem;
 }
 
 * {
@@ -54,6 +66,12 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-magenta);
+}
+
+a{
+  color:   var(--color-lightWhite);
+  text-decoration: none;
+  
 }
 
 #particles-js {

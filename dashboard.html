@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Desafio FPF</title>
   <link preload
@@ -14,65 +15,60 @@
 </head>
 
 <body>
-  <!-- preloader
-    ================================================== -->
-  <div id="preloader">
-    <div id="loader" class="dots-fade">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <div id="top" class="s-wrap site-wrapper">
-    <header class="s-header">
-
-      <div class="header__top">
-        <div class="header__logo">
-          <a class="site-logo" href="index.html">
-            <img src="src/assets/img/logo-fpf.png" alt="Homepage">
-          </a>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <ul class="navbar-links">
+      <li>
+        <a href="#">
+          <img src="/src/assets/icons/users.svg" />
+          Usuários
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="content">
+    <!-- Header -->
+    <header class="header">
+      <!-- Checkbox toogle top -->
+      <div class="checkbox-bar">
+        <input type="checkbox" id="checkbox">
+        <label for="checkbox" class="toggle">
+          <div class="bars" id="bar1"></div>
+          <div class="bars" id="bar2"></div>
+          <div class="bars" id="bar3"></div>
+        </label>
       </div>
-
-      <!-- header__top -->
-      <nav class="header__nav-wrap">
-
-        <ul class="header__nav">
-          <li class="current"><a href="index.html" title="">Usuários</a></li>
-        </ul>
-        <!-- end header__nav -->
-
-        <ul class="header__social">
-          <li class="ss-facebook">
-            <a href="https://facebook.com/">
-              <span class="screen-reader-text">Facebook</span>
-            </a>
-          </li>
-          <li class="ss-github">
-            <a href="#0">
-              <span class="screen-reader-text">GitHub</span>
-            </a>
-          </li>
-          <li class="ss-linkedin">
-            <a href="#0">
-              <span class="screen-reader-text">Linkedin</span>
-            </a>
-          </li>
-        </ul>
-
-      </nav> <!-- end header__nav-wrap -->
-
-      <!-- menu toggle -->
-      <a href="#0" class="header__menu-toggle">
-        <span>Menu</span>
+      <a href="#" class="logo">
+        <img src='src/assets/img/logo-fpf.png' alt="Federação Paulista de Futebol">
+        <h1>FEDERATION CLUB</h1>
       </a>
+      <!-- Popup user -->
+      <label class="popup">
+        <input type="checkbox">
 
+        <div class="user">
+          <img src="/src//assets/icons/user.svg" alt="Usuário sair">
+        </div>
+
+        <nav class="popup-window">
+          <legend>Menu</legend>
+          <ul>
+            <li>
+              <button onclick="redirectToLogin()">
+                <img src="/src/assets/icons/leave.svg" alt="Sair">
+                <span>Sair</span>
+              </button>
+            </li>
+            </li>
+          </ul>
+
+        </nav>
+      </label>
     </header>
-  </div>
 
+    <!-- Conteúdo do dashboard aqui -->
+  </div>
 </body>
-<script src="src/js/jquery-3.2.1.min.js"></script>
 <script src="src/js/dashboard.js"></script>
 
 </html>
