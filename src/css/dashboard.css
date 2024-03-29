@@ -14,7 +14,7 @@
     height: 100px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
 }
 
 .header .logo {
@@ -45,6 +45,7 @@
     align-items: center;
     justify-content: center;
     margin-left: auto;
+    border:2px solid var(--color-darkBlue);
 }
 
 .header .user img {
@@ -114,7 +115,8 @@
 .popup {
   display: inline-block;
   text-rendering: optimizeLegibility;
-  position: relative;
+  position: fixed;
+  right:30px;
 }
 
 .popup input {
@@ -333,19 +335,23 @@
     position: fixed;
     left: 0;
     top: 100px;
-    width: 280px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: 0.5s;
 }
 
+.navbar.hidden {
+  transform: translateX(-250px);
+}
 
 
 .navbar .navbar-links {
     list-style-type: none;
-    margin-top: var(--space-xl);
+    margin-top: var(--space-sm);
     padding: 10px;
     width: 100%;
     border: 1px solid var(--color-lightWhite);
