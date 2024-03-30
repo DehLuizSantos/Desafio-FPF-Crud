@@ -1,113 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      preload
-      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      preload
-      rel="shortcut icon"
-      href="./src/assets/img/logo-fpf.png"
-      type="image/x-icon"
-    />
-    <link preload rel="stylesheet" href="src/css/style.css" />
-    <link preload rel="stylesheet" href="src/css/login.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
-    />
-    <title>Login Desafio FPF</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link preload
+    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
+  <link preload rel="shortcut icon" href="./src/assets/img/logo-fpf.png" type="image/x-icon" />
+  <link preload rel="stylesheet" href="src/css/style.css" />
+  <link preload rel="stylesheet" href="src/css/login.css" />
 
-  <body>
-    <!-- Animação por trás da aplicação -->
-    <div id="particles-js"></div>
 
-    <!-- Container Login -->
-    <div class="login-wrapper">
-      <div class="card-switch">
-        <!-- Checkbox  flip card-->
-        <label class="switch">
-          <input type="checkbox" class="toggle" />
-          <span class="slider"></span>
-          <span class="card-side"></span>
+  <title>Login Desafio FPF</title>
+</head>
 
-          <!-- Flip card container -->
-          <div class="flip-card__inner">
-            <div class="flip-card__front">
-              <div class="title">Logar</div>
+<body>
+  <!-- Animação por trás da aplicação -->
+  <div id="particles-js"></div>
 
-              <!-- Formulario login -->
-              <form
-                id="login-form"
-                class="flip-card__form"
-                action="dashboard.html"
-              >
-                <input
-                  class="flip-card__input"
-                  name="login-email"
-                  placeholder="Email"
-                  type="email"
-                  required
-                />
-                <input
-                  class="flip-card__input"
-                  name="login-password"
-                  placeholder="Password"
-                  type="password"
-                  required
-                />
-                <button type="submit" class="flip-card__btn">Logar!</button>
-              </form>
-            </div>
+  <!-- Container Login -->
+  <div class="login-wrapper">
+    <div class="card-switch">
+      <!-- Checkbox  flip card-->
+      <div class="switch">
+        <input type="checkbox" class="toggle" id="checked" />
+        <span class="slider"></span>
+        <span class="card-side"></span>
 
-            <div class="flip-card__back">
-              <div class="title">Inscrever</div>
+        <!-- Flip card container -->
+        <div class="flip-card__inner">
+          <div class="flip-card__front">
+            <div class="title">Logar</div>
 
-              <!-- Formulario registrar -->
-              <form
-                id="register-form"
-                class="flip-card__form"
-                action="dashboard.html"
-              >
-                <input
-                  class="flip-card__input"
-                  placeholder="Name"
-                  type="name"
-                  name="register-name"
-                  required
-                />
-                <input
-                  class="flip-card__input"
-                  name="register-email"
-                  placeholder="Email"
-                  type="email"
-                  required
-                />
-                <input
-                  class="flip-card__input"
-                  name="register-password"
-                  placeholder="Password"
-                  type="password"
-                  required
-                />
-                <button class="flip-card__btn">Confirmar!</button>
-              </form>
-            </div>
+            <!-- Formulario login -->
+            <form id="login-form" class="flip-card__form" action="dashboard.html">
+              <input class="flip-card__input" name="login-email" placeholder="Email" type="email" required />
+              <input class="flip-card__input" name="login-password" placeholder="Password" type="password" required />
+              <button type="submit" class="flip-card__btn">Logar!</button>
+            </form>
           </div>
-        </label>
+
+          <div class="flip-card__back">
+            <div class="title">Inscrever</div>
+
+            <!-- Formulario registrar -->
+            <form id="register-form" class="flip-card__form" action="dashboard.html">
+              <input class="flip-card__input" placeholder="Name" type="name" name="register-name" required />
+              <input class="flip-card__input" name="register-email" placeholder="Email" type="email" required />
+              <input class="flip-card__input" name="register-password" placeholder="Password" type="password"
+                required />
+              <button class="flip-card__btn">Confirmar!</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 
-  <script src="src/js/particles.js"></script>
-  <script src="src/js/app.js"></script>
-  <script src="src/js/login.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="src/js/particles.js"></script>
+<script src="src/js/app.js"></script>
+<script src="src/js/login.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 </html>
