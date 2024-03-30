@@ -442,59 +442,54 @@
 }
 
 .button-cadastrar {
-  position: relative;
-  width: 180px;
-  height: 40px;
-  background-color: var(--color-darkBlue);
-  display: flex;
-  align-items: center;
-  color: white;
-  flex-direction: column;
-  justify-content: center;
-  border: none;
-  padding: 12px;
-  gap: 12px;
-  border-radius: 8px;
+display: inline-block;
+ border-radius: 5px;
+ background-color: var(--color-darkBlue);
+ color: white;
+ font-family: inherit;
+ text-align: center;
+ font-size: 13px;
+ 
+ width: 10em;
+ padding: 1em;
+ transition: all 0.4s;
+ cursor: pointer;
+}
+
+.button-cadastrar:hover{
+box-shadow: 0px 14px 56px -11px var(--color-purpleUltraLight);
+outline:1px solid var(--color-lightWhite);
+}
+
+.button-cadastrar span {
   cursor: pointer;
+ display: inline-block;
+ position: relative;
+ transition: 0.4s;
+}
+.button-cadastrar span:after {
+   content: '+';
+ position: absolute;
+ opacity: 0;
+ top: 0;
+ right: 5px;
+ transition: 0.7s;
 }
 
-.button-cadastrar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  left: -4px;
-  top: -1px;
-  margin: auto;
-  width: 190px;
-  height: 48px;
-  border-radius: 10px;
-  background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
-  z-index: -10;
-  pointer-events: none;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.button-cadastrar:hover span {
+ padding-right: 15px;
+ font-size: var(--font-md);
+ font-weight: bold;
 }
 
-.button-cadastrar::after {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
+.button-cadastrar:hover span:after {
+ opacity: 4;
+ right: 0;
 }
 
-.button-cadastrar:hover::after {
-  filter: blur(30px);
-}
 
-.button-cadastrar:hover::before {
-  transform: rotate(-180deg);
-}
 
-.button-cadastrar:active::before {
-  scale: 0.7;
-}
+
 
 .content-filter {
   border: 1px solid var(--color-lightWhite);
@@ -525,16 +520,17 @@
 
 .users-wrapper {
   margin-top: var(--space-md);
-  padding-bottom: 160px;
+  padding-bottom: 90px;
 }
 
 @media screen and (min-width: 600px) {
   .users-wrapper {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 40px;
+
   }
 }
 
@@ -668,7 +664,27 @@
 }
 
 
-/* MODAL delete */
+/* Content Responsive FIM
+ *****************************************************************************
+*/
+
+/* Footer 
+ *****************************************************************************
+*/
+
+footer{
+  border:1px solid var(--color-lightWhite);
+  width: 100%;
+  padding: 15px;
+  background-color: var(--background-color);
+  color: var(--color-lightWhite);
+  border-radius: 5px;
+}
+
+
+/* Modal Delte
+ *****************************************************************************
+*/
 
 .modal {
   opacity: 0;
@@ -742,3 +758,4 @@
   text-decoration: none;
   cursor: pointer;
 }
+

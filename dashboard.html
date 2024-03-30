@@ -17,7 +17,7 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar hidden" id="navbar">
     <ul class="navbar-links">
       <li>
         <a href="#">
@@ -68,11 +68,12 @@
   </header>
 
   <!-- Content -->
-  <div class="content">
+  <div class="content open">
     <div class="container">
       <div class="content-header">
         <h1>Usuários</h1>
-        <button class="button-cadastrar">CADASTRAR NOVO</button>
+        <button class="button-cadastrar" style="vertical-align:middle"><span>CADASTRAR</span></button>
+        <!-- <button class="button-cadastrar">CADASTRAR NOVO</button> -->
       </div>
 
       <!-- Search -->
@@ -82,9 +83,14 @@
 
       <!-- Render all users inside this div-->
       <div class="users-wrapper" id="users-wrapper"></div>
+      <!-- Footer -->
+      <footer>
+        <h4>Todos direitos reservados ©André Luiz Santos</h4>
+      </footer>
     </div>
   </div>
   </div>
+
 
   <!-- Modal Delete -->
   <div id="modal-delete" class="modal">
@@ -93,7 +99,7 @@
       <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
 
       <div class="buttons">
-        <button class="red">CANCELAR</button>
+        <button class="red" onclick="closeModalDelete()">CANCELAR</button>
         <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
       </div>
     </div>

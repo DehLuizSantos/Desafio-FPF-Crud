@@ -7,7 +7,7 @@ function toggleNavbar() {
   const checkbox = document.getElementById("checkbox");
   const navbar = document.getElementById("navbar");
   const content = document.querySelector(".content");
-  if (checkbox.checked) {
+  if (!checkbox.checked) {
     navbar.classList.add("hidden");
     content.classList.add("open");
   } else {
