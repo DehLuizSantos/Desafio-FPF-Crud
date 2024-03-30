@@ -1,85 +1,85 @@
 /* Função Logar */
-document
-  .getElementById("login-form")
-  .addEventListener("submit", async event => {
-    event.preventDefault(); // Impede que o formulário seja enviado por parametro URL
-    const formData = new FormData(event.target);
-    const loginData = {
-      email: formData.get("login-email"),
-      password: formData.get("login-password")
-    };
+document.getElementById("login-form").addEventListener("submit", event => {
+  event.preventDefault(); // Impede que o formulário seja enviado por parametro URL
+  const formData = new FormData(event.target);
+  const loginData = {
+    email: formData.get("login-email"),
+    password: formData.get("login-password")
+  };
 
-    try {
-      /* Requisição pra tabela users */
-      const response = await fetch("http://localhost:3000/users");
-      const users = await response.json();
+  /* Resposta sessão */
+  const usersSession = localStorage.getItem("users");
+  const users = JSON.parse(usersSession);
 
-      /* Verifica se usuário e senha estão corretas */
-      const userExists = users.find(
-        user =>
-          user.email === loginData.email && user.password === loginData.password
-      );
+  if (!users) {
+    Swal.fire({
+      position: "top-end",
+      title: "Erro!",
+      text: "Usuário não encontrado!.",
+      icon: "error",
+      confirmButtonText: "Voltar",
+      timer: 1500
+    });
+    return;
+  }
+  const userAutentication = users.some(
+    user => user.email && user.password === loginData.password
+  );
 
-      if (userExists) {
-        window.location.href = "dashboard.html";
-        return;
-      }
-      /* Popup personalizado */
-      Swal.fire({
-        position: "top-end",
-        title: "Error!",
-        text: "Usuário não encontrado. Por favor, verifique suas credenciais.",
-        icon: "error",
-        confirmButtonText: "Voltar",
-        timer: 1500
-      });
-    } catch (error) {
-      console.error("Erro ao fazer login:", error);
-      Swal.fire({
-        position: "top-end",
-        title: "Error!",
-        text: "Houve um erro no sistema! volte mais tarde.",
-        icon: "error",
-        confirmButtonText: "Voltar",
-        timer: 1500
-      });
-    }
-  });
+  if (!userAutentication) {
+    Swal.fire({
+      position: "top-end",
+      title: "Erro!",
+      text: "Usuário não encontrado!.",
+      icon: "error",
+      confirmButtonText: "Voltar",
+      timer: 1500
+    });
+    return;
+  }
+
+  window.location.href = "dashboard.html";
+});
 
 /* Função Cadastrar */
-document
-  .getElementById("register-form")
-  .addEventListener("submit", async event => {
-    event.preventDefault(); // Impede que o formulário seja por parametro URL
+document.getElementById("register-form").addEventListener("submit", event => {
+  event.preventDefault(); // Impede que o formulário seja por parametro URL
 
-    const formData = new FormData(event.target);
-    const userData = {
-      name: formData.get("register-name"),
-      email: formData.get("register-email"),
-      password: formData.get("register-password")
-    };
+  const formData = new FormData(event.target);
+  const userData = {
+    name: formData.get("register-name"),
+    email: formData.get("register-email"),
+    password: formData.get("register-password")
+  };
 
-    try {
-      const response = await fetch("http://localhost:3000/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData)
-      });
+  const usersSession = localStorage.getItem("users") || "[]";
+  const users = JSON.parse(usersSession);
+  const usersSessionAlredyExist = users.some(
+    user => user.email === userData.email
+  );
 
-      if (!response.ok) {
-        throw new Error("Erro ao cadastrar usuário");
-      }
-      /* Armazena o nome do usuário na sessão */
-      sessionStorage.setItem("name", userData.name);
-      return (window.location.href = "dashboard.html");
-    } catch (error) {
-      console.error("Erro ao cadastrar usuário:", error);
-      Swal.fire(
-        "Erro!",
-        "Ocorreu um erro ao cadastrar usuário. Por favor, tente novamente mais tarde.",
-        "error"
-      );
-    }
+  if (usersSessionAlredyExist) {
+    Swal.fire({
+      position: "top-end",
+      title: "Error!",
+      text: "Usuário já existe!.",
+      icon: "error",
+      confirmButtonText: "Voltar",
+      timer: 1500
+    });
+    return;
+  }
+
+  Swal.fire({
+    position: "top-end",
+    title: "Sucesso!",
+    text: "Usuário Cadastrado com sucesso!.",
+    icon: "success",
+    confirmButtonText: "Voltar",
+    timer: 1500
   });
+  /* Armazena o nome do usuário na sessão */
+  localStorage.setItem("users", JSON.stringify([...users, userData]));
+  const slider = document.getElementById("checked");
+  slider.checked = false;
+});
