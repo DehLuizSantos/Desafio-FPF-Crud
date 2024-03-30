@@ -110,28 +110,34 @@ function renderAllUsers(usersToRender) {
   });
 }
 
+function attUsers(usersToRender) {
+  document.addEventListener("DOMContentLoaded", function() {
+    renderAllUsers(usersToRender); // Chama a função renderAllUsers() quando o DOM estiver pronto
+  });
+}
+
 function openModalDelete(userId, userName) {
   id = userId;
   nome = userName;
-  const modalDelete = document.getElementById("modal-delete");
+  const modalDelete = document.getElementsByClassName("modal-delete_content");
+  const modal = document.getElementsByClassName("modal");
   const spanName = document.getElementById("name");
+  modal[0].style.zIndex = 2;
+  modal[0].style.opacity = 1;
+  modalDelete[0].style.opacity = 1;
+  modalDelete[0].style.zIndex = 3;
   spanName.textContent = nome;
-  modalDelete.style.opacity = 1;
-  modalDelete.style.zIndex = 3;
 }
 
-function closeModalDelete() {
-  const modalDelete = document.getElementById("modal-delete");
-  console.log("aqui");
-  modalDelete.style.opacity = 0;
-  modalDelete.style.zIndex = -1;
-}
-
-function attUsers(usersToRender) {
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log("aqui");
-    renderAllUsers(usersToRender); // Chama a função renderAllUsers() quando o DOM estiver pronto
-  });
+function closeModal() {
+  const modalDelete = document.getElementsByClassName("modal-delete_content");
+  const modalCrud = document.getElementsByClassName("modal-crud_content");
+  const modal = document.getElementsByClassName("modal");
+  modal[0].style.zIndex = -1;
+  modalDelete[0].style.opacity = 0;
+  modalDelete[0].style.zIndex = -1;
+  modalCrud[0].style.opacity = 0;
+  modalCrud[0].style.zIndex = -1;
 }
 
 function confirmDeleteUser() {
@@ -141,6 +147,39 @@ function confirmDeleteUser() {
   attUsers(allNewUsers);
   window.location = "/dashboard.html";
   closeModalDelete();
+}
+
+function openModalRegisterEdit() {
+  id = null;
+  const modalCrud = document.getElementsByClassName("modal-crud_content");
+  const modal = document.getElementsByClassName("modal");
+  modalCrud[0].style.opacity = 1;
+  modalCrud[0].style.zIndex = 3;
+  modal[0].style.zIndex = 2;
+  modal[0].style.opacity = 1;
+}
+
+async function formatGetAddressCep() {
+  try {
+    const cep = document.getElementById("cep").value.trim().replace("-", "");
+    if (cep.length > 5) {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`); // Faz a requisição à API do Via CEP
+      const data = await response.json(); // Converte a resposta para JSON
+      console.log(data);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function formatarCEP(input) {
+  let valor = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
+
+  if (valor.length > 5) {
+    valor = valor.replace(/^(\d{5})(\d)/, "$1-$2"); // Adiciona o hífen após os primeiros 5 dígitos
+  }
+
+  input.value = valor; // Atualiza o valor do campo
 }
 
 attUsers(users);

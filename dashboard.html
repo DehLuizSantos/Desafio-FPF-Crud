@@ -72,8 +72,7 @@
     <div class="container">
       <div class="content-header">
         <h1>Usuários</h1>
-        <button class="button-cadastrar" style="vertical-align:middle"><span>CADASTRAR</span></button>
-        <!-- <button class="button-cadastrar">CADASTRAR NOVO</button> -->
+        <button class="button-cadastrar" onclick="openModalRegisterEdit()"><span>CADASTRAR</span></button>
       </div>
 
       <!-- Search -->
@@ -85,7 +84,7 @@
       <div class="users-wrapper" id="users-wrapper"></div>
       <!-- Footer -->
       <footer>
-        <h4>Todos direitos reservados ©André Luiz Santos</h4>
+        <h4>Todos direitos reservados © André Luiz Santos</h4>
       </footer>
     </div>
   </div>
@@ -93,16 +92,65 @@
 
 
   <!-- Modal Delete -->
-  <div id="modal-delete" class="modal">
-    <div class="modal-delete_content">
-      <span class="close" onclick="closeModalDelete()">&times;</span>
-      <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
+  <div class="modal">
+    <div id="modal-delete">
+      <div class="modal-delete_content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
 
-      <div class="buttons">
-        <button class="red" onclick="closeModalDelete()">CANCELAR</button>
-        <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
+        <div class="buttons">
+          <button class="red" onclick="closeModal()">CANCELAR</button>
+          <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
+        </div>
       </div>
-    </div>
+
+      <!-- Modal Cadastrar/Editar -->
+      <div id="modal-crud">
+        <div class="modal-crud_content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <form action="" class="form">
+            <div class="photo">
+              <label class="custum-file-upload" for="file">
+                <div class="icon">
+                  <img src="/src/assets/icons/download.svg" alt="download imagem">
+                </div>
+                <div class="text">
+                  <span>Clique aqui para enviar a imagem</span>
+                </div>
+                <input type="file" id="file">
+              </label>
+            </div>
+            <div class="personal">
+              <div class="personal-header">
+                <div class="ativo">
+                  <legend>Ativo</legend>
+                  <input type="checkbox" placeholder="Status" id="status" />
+                </div>
+                <div class="birday">
+                  <legend>Nascimento</legend>
+                  <input type="date" placeholder="Nascimento" id="nascimento" class="input" />
+                </div>
+              </div>
+              <input type="text" placeholder="Nome" id="nome" class="input" />
+              <input type="text" placeholder="CPF" id="cpf" class="input" />
+              <input type="text" placeholder="Idade" id="idade" class="input" />
+              <input type="text" placeholder="EMAIL" id="email" class="input" />
+              <input type="text" placeholder="Telefone" id="telefone" class="input" />
+              <input maxlength="9" type="text" placeholder="Cep" id="cep" class="input" onchange="formatGetAddressCep()"
+                oninput="formatarCEP(this)" />
+              <div class="divider"></div>
+              <div class="address"></div>
+            </div>
+
+
+          </form>
+
+          <div class="buttons">
+            <button class="red" onclick="closeModal()">CANCELAR</button>
+            <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
+          </div>
+        </div>
+      </div>
 
 </body>
 <script src="src/js/dashboard.js"></script>
