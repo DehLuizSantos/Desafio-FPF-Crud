@@ -1,5 +1,7 @@
 var id = 0;
-var nome = "exemplo";
+var nome = "";
+var allUsers = localStorage.getItem("users");
+var users = JSON.parse(allUsers);
 
 function toggleNavbar() {
   const checkbox = document.getElementById("checkbox");
@@ -18,13 +20,11 @@ function redirectToLogin() {
   window.location.href = "/";
 }
 
-function renderAllUsers() {
-  const allUsers = localStorage.getItem("users");
-  const users = JSON.parse(allUsers);
+function renderAllUsers(usersToRender) {
   const userListDiv = document.getElementById("users-wrapper");
 
   /* Renderiza os usuários dinamiamente */
-  users.forEach(user => {
+  usersToRender.forEach(user => {
     // Cria os elementos HTML para representar cada usuário
     const userContainer = document.createElement("div");
     userContainer.classList.add("user-container");
@@ -112,10 +112,10 @@ function renderAllUsers() {
 
 function openModalDelete(userId, userName) {
   id = userId;
-  nome = userName; 
+  nome = userName;
   const modalDelete = document.getElementById("modal-delete");
-  const spanName = document.getElementById('name')
-  spanName.textContent = nome
+  const spanName = document.getElementById("name");
+  spanName.textContent = nome;
   modalDelete.style.opacity = 1;
   modalDelete.style.zIndex = 3;
 }
@@ -127,4 +127,20 @@ function closeModalDelete() {
   modalDelete.style.zIndex = -1;
 }
 
-renderAllUsers();
+function attUsers(usersToRender) {
+  document.addEventListener("DOMContentLoaded", function() {
+    console.log("aqui");
+    renderAllUsers(usersToRender); // Chama a função renderAllUsers() quando o DOM estiver pronto
+  });
+}
+
+function confirmDeleteUser() {
+  const allNewUsers = users.filter(user => user.id !== id);
+  const allUserToSend = JSON.stringify(allNewUsers);
+  localStorage.setItem("users", allUserToSend);
+  attUsers(allNewUsers);
+  window.location = "/dashboard.html";
+  closeModalDelete();
+}
+
+attUsers(users);

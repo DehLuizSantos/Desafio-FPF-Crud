@@ -2,10 +2,7 @@
  *****************************************************************************
 */
 
-.container{
-  height:100%;
-  overflow-x: auto;
-}
+
 
 .header {
   background-color: var(--background-color);
@@ -15,7 +12,7 @@
   border-bottom: 1px solid var(--color-lightWhite);
   width: 100vw;
   z-index: 1;
-  position: relative;
+  position: fixed;
   height: 100px;
   display: flex;
   align-items: center;
@@ -336,7 +333,7 @@
   position: fixed;
   left: 0;
   top: 100px;
-  width: 100%;
+  width: 100vw;
   display: flex;
   z-index: 2;
   flex-direction: column;
@@ -404,13 +401,21 @@
 */
 
 .content {
-  position: fixed;
+  position: absolute;
   z-index: 0;
   padding: var(--space-md);
   transition: 0.3s;
-  left: 250px;
-  max-width: 1000px;
+  left: 250px; 
+  top: 100px;
   width: calc(100% - 250px);
+  overflow: hidden;
+
+}
+
+.content .container{
+  
+  max-width: 1000px;
+  height:100%;
 
 }
 
@@ -424,6 +429,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin:10px;
+
 }
 
 
