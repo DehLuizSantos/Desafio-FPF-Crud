@@ -1,3 +1,6 @@
+var id = 0;
+var nome = "exemplo";
+
 function toggleNavbar() {
   const checkbox = document.getElementById("checkbox");
   const navbar = document.getElementById("navbar");
@@ -45,6 +48,10 @@ function renderAllUsers() {
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("red");
+    deleteButton.addEventListener("click", function() {
+      // Aqui você pode chamar a função que deseja disparar
+      openModalDelete(user.id, user.name);
+    });
     deleteButton.textContent = "DELETAR";
 
     userOptions.appendChild(logoImg);
@@ -61,6 +68,8 @@ function renderAllUsers() {
     nameHeading.textContent = user.name; // Nome do usuário
 
     nameDiv.appendChild(nameHeading);
+
+    /* Informações basicas */
 
     const emailDiv = document.createElement("div");
     emailDiv.classList.add("info-wrapper");
@@ -99,6 +108,23 @@ function renderAllUsers() {
 
     userListDiv.appendChild(userContainer);
   });
+}
+
+function openModalDelete(userId, userName) {
+  id = userId;
+  nome = userName; 
+  const modalDelete = document.getElementById("modal-delete");
+  const spanName = document.getElementById('name')
+  spanName.textContent = nome
+  modalDelete.style.opacity = 1;
+  modalDelete.style.zIndex = 3;
+}
+
+function closeModalDelete() {
+  const modalDelete = document.getElementById("modal-delete");
+  console.log("aqui");
+  modalDelete.style.opacity = 0;
+  modalDelete.style.zIndex = -1;
 }
 
 renderAllUsers();

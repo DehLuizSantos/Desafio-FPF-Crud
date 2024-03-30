@@ -15,70 +15,85 @@
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar" id="navbar">
-    <ul class="navbar-links">
-      <li>
-        <a href="#">
-          <img src="/src/assets/icons/users.svg" />
-          Usuários
-        </a>
-      </li>
-    </ul>
-  </nav>
+  <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <ul class="navbar-links">
+        <li>
+          <a href="#">
+            <img src="/src/assets/icons/users.svg" />
+            Usuários
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-  <!-- Header -->
-  <header class="header">
-    <!-- Checkbox toogle top -->
-    <div class="checkbox-bar">
-      <input type="checkbox" id="checkbox" onclick="toggleNavbar()">
-      <label for="checkbox" class="toggle">
-        <div class="bars" id="bar1"></div>
-        <div class="bars" id="bar2"></div>
-        <div class="bars" id="bar3"></div>
+    <!-- Header -->
+    <header class="header">
+      <!-- Checkbox toogle top -->
+      <div class="checkbox-bar">
+        <input type="checkbox" id="checkbox" onclick="toggleNavbar()">
+        <label for="checkbox" class="toggle">
+          <div class="bars" id="bar1"></div>
+          <div class="bars" id="bar2"></div>
+          <div class="bars" id="bar3"></div>
+        </label>
+      </div>
+      <a href="/dashboard.html" class="logo">
+        <img src='src/assets/img/logo-fpf.png' alt="Federação Paulista de Futebol">
+        <h1>FEDERATION CLUB</h1>
+      </a>
+      <!-- Popup user -->
+      <label class="popup">
+        <input type="checkbox">
+
+        <div class="user">
+          <img src="/src//assets/icons/user.svg" alt="Usuário sair">
+        </div>
+
+        <nav class="popup-window">
+          <legend>Menu</legend>
+          <ul>
+            <li>
+              <button onclick="redirectToLogin()">
+                <img src="/src/assets/icons/leave.svg" alt="Sair">
+                <span>Sair</span>
+              </button>
+            </li>
+            </li>
+          </ul>
+
+        </nav>
       </label>
-    </div>
-    <a href="/dashboard.html" class="logo">
-      <img src='src/assets/img/logo-fpf.png' alt="Federação Paulista de Futebol">
-      <h1>FEDERATION CLUB</h1>
-    </a>
-    <!-- Popup user -->
-    <label class="popup">
-      <input type="checkbox">
+    </header>
 
-      <div class="user">
-        <img src="/src//assets/icons/user.svg" alt="Usuário sair">
+    <!-- Content -->
+    <div class="content">
+      <div class="content-header">
+        <h1>Usuários</h1>
+        <button class="button-cadastrar">CADASTRAR NOVO</button>
       </div>
 
-      <nav class="popup-window">
-        <legend>Menu</legend>
-        <ul>
-          <li>
-            <button onclick="redirectToLogin()">
-              <img src="/src/assets/icons/leave.svg" alt="Sair">
-              <span>Sair</span>
-            </button>
-          </li>
-          </li>
-        </ul>
+      <!-- Search -->
+      <div class="content-filter">
+        <input placeholder="Pesquisar" class="input" name="text" type="text">
+      </div>
 
-      </nav>
-    </label>
-  </header>
-
-  <!-- Content -->
-  <div class="content">
-    <div class="content-header">
-      <h1>Usuários</h1>
-      <button class="button-cadastrar">CADASTRAR NOVO</button>
+      <!-- Render all users inside this div-->
+      <div class="users-wrapper" id="users-wrapper"></div>
     </div>
+  </div>
 
-    <div class="content-filter">
-      <input placeholder="Pesquisar" class="input" name="text" type="text">
-    </div>
+  <!-- Modal Delete -->
+  <div id="modal-delete" class="modal">
+    <div class="modal-delete_content">
+      <span class="close" onclick="closeModalDelete()">&times;</span>
+      <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
 
-    <div class="users-wrapper" id="users-wrapper">
-
+      <div class="buttons">
+        <button class="red">CANCELAR</button>
+        <button class="purple">CONFIRMAR</button>
+      </div>
     </div>
   </div>
 
