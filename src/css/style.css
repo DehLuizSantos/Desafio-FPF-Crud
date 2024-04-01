@@ -71,8 +71,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 a{
   color:   var(--color-lightWhite);
-  text-decoration: none;
-  
+  text-decoration: none;  
 }
 
 button {

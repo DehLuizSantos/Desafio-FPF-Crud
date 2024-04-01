@@ -47,7 +47,7 @@ document.getElementById("register-form").addEventListener("submit", event => {
 
   const formData = new FormData(event.target);
   const userData = {
-    name: formData.get("register-name"),
+    nome: formData.get("register-name"),
     email: formData.get("register-email"),
     password: formData.get("register-password")
   };

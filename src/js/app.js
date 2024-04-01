@@ -1,3 +1,4 @@
+/* Controla o background do login */
 particlesJS("particles-js", {
   particles: {
     number: {
