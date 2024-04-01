@@ -5,9 +5,22 @@ var allUsers = localStorage.getItem("users");
 var users = JSON.parse(allUsers);
 var user = null;
 
+function mostrarLoading() {
+  const loading = document.getElementById("loading");
+  loading.style.display = "block";
+}
+
+// Função para ocultar o elemento de carregamento
+function ocultarLoading() {
+  setTimeout(() => {
+    const loading = document.getElementById("loading");
+    loading.style.display = "none";
+  }, 1000); // Atraso de 1 segundo (1000 milissegundos)
+}
 /* Loop usuários criando componentes na tela */
 function renderAllUsers(usersToRender) {
   const userListDiv = document.getElementById("users-wrapper");
+  mostrarLoading();
   /* Renderiza os usuários dinamiamente */
   usersToRender.forEach(user => {
     // Cria os elementos HTML para representar cada usuário
@@ -26,6 +39,7 @@ function renderAllUsers(usersToRender) {
 
     const logoImg = document.createElement("img");
     logoImg.src = user.photo || "/src/assets/img/user-default.png"; // URL da imagem do usuário
+    logoImg.id = "photo-" + user.id;
     logoImg.alt = "Logo"; // Texto alternativo para a imagem
 
     /* Botões */
@@ -39,7 +53,6 @@ function renderAllUsers(usersToRender) {
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("red");
     deleteButton.addEventListener("click", function() {
-      // Aqui você pode chamar a função que deseja disparar
       openModalDelete(user.id, user.nome);
     });
     deleteButton.textContent = "DELETAR";
@@ -125,6 +138,9 @@ function renderAllUsers(usersToRender) {
     userFooter.classList.add("user-footer");
 
     const moreInfoButton = document.createElement("button");
+    moreInfoButton.addEventListener("click", function() {
+      openModalRegisterEdit(user.id);
+    });
     moreInfoButton.textContent = "MAIS INFORMAÇÕES";
 
     userFooter.appendChild(moreInfoButton);
@@ -133,6 +149,7 @@ function renderAllUsers(usersToRender) {
     userContainer.appendChild(userWrapper);
     userListDiv.appendChild(userContainer);
   });
+  ocultarLoading();
 }
 
 /* Callback para renderizar usuário */
@@ -240,6 +257,10 @@ document.getElementById("crud-form").addEventListener("submit", event => {
   event.preventDefault(); // Impede que o formulário seja por parametro URL
 
   const formData = new FormData(event.target);
+  /* Cria um bundle temporario pra foto */
+  const file = formData.get("file");
+  const imageUrl = URL.createObjectURL(file);
+
   const registerData = {
     status: formData.get("status") === null ? false : true,
     nascimento: formData.get("nascimento"),
@@ -250,7 +271,7 @@ document.getElementById("crud-form").addEventListener("submit", event => {
     telefone: formData.get("telefone"),
     id: userId ? userId : Math.floor(Math.random() * 1001),
     cep: formData.get("cep"),
-    photo: formData.get("photo"),
+    photo: imageUrl,
     endereco: {
       rua: formData.get("rua"),
       numero: formData.get("numero"),
@@ -267,6 +288,7 @@ document.getElementById("crud-form").addEventListener("submit", event => {
       registerData.telefone;
     document.getElementById(`cpf-${userId}`).textContent = registerData.cpf;
     document.getElementById(`email-${userId}`).textContent = registerData.email;
+    document.getElementById(`photo-${userId}`).src = registerData.photo;
 
     const filteredUser = users.map(user => {
       if (user["id"] === userId) {
