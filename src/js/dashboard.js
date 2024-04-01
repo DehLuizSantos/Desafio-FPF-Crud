@@ -3,31 +3,14 @@ var nome = "";
 var allUsers = localStorage.getItem("users");
 var users = JSON.parse(allUsers);
 
-function toggleNavbar() {
-  const checkbox = document.getElementById("checkbox");
-  const navbar = document.getElementById("navbar");
-  const content = document.querySelector(".content");
-  if (!checkbox.checked) {
-    navbar.classList.add("hidden");
-    content.classList.add("open");
-  } else {
-    navbar.classList.remove("hidden");
-    content.classList.remove("open");
-  }
-}
-
-function redirectToLogin() {
-  window.location.href = "/";
-}
-
 function renderAllUsers(usersToRender) {
   const userListDiv = document.getElementById("users-wrapper");
-
   /* Renderiza os usuários dinamiamente */
   usersToRender.forEach(user => {
     // Cria os elementos HTML para representar cada usuário
     const userContainer = document.createElement("div");
     userContainer.classList.add("user-container");
+    userContainer.id = user.id;
 
     const userWrapper = document.createElement("div");
     userWrapper.classList.add("user-wrapper");
@@ -39,7 +22,7 @@ function renderAllUsers(usersToRender) {
     userOptions.classList.add("user-options");
 
     const logoImg = document.createElement("img");
-    logoImg.src = user.logoSrc || "/src/assets/img/logo-fpf.png"; // URL da imagem do usuário
+    logoImg.src = user.logoSrc || "/src/assets/icons/user.svg"; // URL da imagem do usuário
     logoImg.alt = "Logo"; // Texto alternativo para a imagem
 
     const editButton = document.createElement("button");
@@ -50,7 +33,7 @@ function renderAllUsers(usersToRender) {
     deleteButton.classList.add("red");
     deleteButton.addEventListener("click", function() {
       // Aqui você pode chamar a função que deseja disparar
-      openModalDelete(user.id, user.name);
+      openModalDelete(user.id, user.nome);
     });
     deleteButton.textContent = "DELETAR";
 
@@ -65,7 +48,7 @@ function renderAllUsers(usersToRender) {
     nameDiv.classList.add("name");
 
     const nameHeading = document.createElement("h3");
-    nameHeading.textContent = user.name; // Nome do usuário
+    nameHeading.textContent = user.nome; // Nome do usuário
 
     nameDiv.appendChild(nameHeading);
 
@@ -111,10 +94,23 @@ function renderAllUsers(usersToRender) {
 }
 
 function attUsers(usersToRender) {
-  document.addEventListener("DOMContentLoaded", function() {
-    renderAllUsers(usersToRender); // Chama a função renderAllUsers() quando o DOM estiver pronto
-  });
+  renderAllUsers(usersToRender);
 }
+
+function getUsersFromLocalStorage() {
+  const allUsers = localStorage.getItem("users");
+  return allUsers ? JSON.parse(allUsers) : [];
+}
+
+// Função para renderizar os usuários na página
+function renderUsersOnPage() {
+  const usersFromStorage = getUsersFromLocalStorage();
+  renderAllUsers(usersFromStorage);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  renderUsersOnPage();
+});
 
 function openModalDelete(userId, userName) {
   id = userId;
@@ -144,9 +140,12 @@ function confirmDeleteUser() {
   const allNewUsers = users.filter(user => user.id !== id);
   const allUserToSend = JSON.stringify(allNewUsers);
   localStorage.setItem("users", allUserToSend);
-  attUsers(allNewUsers);
-  window.location = "/dashboard.html";
-  closeModalDelete();
+  users = allNewUsers;
+  const userContainerId = document.getElementById(id);
+  userContainerId.remove();
+  console.log(userContainerId);
+
+  closeModal();
 }
 
 function openModalRegisterEdit() {
@@ -159,27 +158,34 @@ function openModalRegisterEdit() {
   modal[0].style.opacity = 1;
 }
 
-async function formatGetAddressCep() {
-  try {
-    const cep = document.getElementById("cep").value.trim().replace("-", "");
-    if (cep.length > 5) {
-      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`); // Faz a requisição à API do Via CEP
-      const data = await response.json(); // Converte a resposta para JSON
-      console.log(data);
+document.getElementById("crud-form").addEventListener("submit", event => {
+  event.preventDefault(); // Impede que o formulário seja por parametro URL
+
+  const formData = new FormData(event.target);
+  const registerData = {
+    status: formData.get("status") === null ? false : true,
+    nascimento: formData.get("nascimento"),
+    nome: formData.get("nome"),
+    cpf: formData.get("cpf"),
+    idade: formData.get("idade"),
+    email: formData.get("email"),
+    telefone: formData.get("telefone"),
+    id: Math.floor(Math.random() * 1001),
+    cep: formData.get("cep"),
+    photo: formData.get("photo"),
+    endereco: {
+      rua: formData.get("rua"),
+      numero: formData.get("numero"),
+      cidade: formData.get("cidade"),
+      bairro: formData.get("bairro"),
+      complemento: formData.get("complemento")
     }
-  } catch (error) {
-    console.error(error);
-  }
-}
+  };
+  const newUsers = [...users, registerData];
+  const newUser = [registerData];
+  localStorage.setItem("users", JSON.stringify(newUsers));
+  users = newUsers;
+  attUsers(newUser);
 
-function formatarCEP(input) {
-  let valor = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
-
-  if (valor.length > 5) {
-    valor = valor.replace(/^(\d{5})(\d)/, "$1-$2"); // Adiciona o hífen após os primeiros 5 dígitos
-  }
-
-  input.value = valor; // Atualiza o valor do campo
-}
-
-attUsers(users);
+  closeModal();
+});

@@ -480,10 +480,6 @@
   right: 0;
 }
 
-
-
-
-
 .content-filter {
   border: 1px solid var(--color-lightWhite);
   margin-top: var(--space-md);
@@ -499,6 +495,13 @@
   border: 2px solid white;
   border-radius: 5px;
   box-shadow: 3px 3px 2px var(--color-purpleLight);
+  color: var(--color-lightWhite);
+  width: 100%;
+}
+
+.input:disabled {
+  background-color: var(--color-lightBlack);
+  color: var(--color-lightWhite);
 }
 
 .input:focus {
@@ -510,10 +513,11 @@
   transition-property: box-shadow;
 }
 
-.input::placeholder{
-  color:var(--color-lightWhite);
+.input::placeholder {
+  color: var(--color-lightWhite);
 }
- .input[type="date"]::-webkit-calendar-picker-indicator{ 
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: var(--color-lightWhite);
   border-radius: 5px;
 }
@@ -770,7 +774,7 @@ footer {
 }
 
 
-/* Modal crud
+/* Modal crud Formulario
  *****************************************************************************
 */
 
@@ -783,7 +787,7 @@ footer {
   width: 80%;
   max-width: 820px;
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 50%;
   z-index: -1;
   opacity: 0;
@@ -792,29 +796,32 @@ footer {
   color: var(--color-darkBlue);
 }
 
+@media(min-width: 600px){
+  .modal-crud_content{
+    top: 50%;
+  }
+}
+
 
 .modal-crud_content form {
   height: 100%;
   width: 100%;
 }
-
-
-
-.modal-crud_content form input {
-  width: 100%;
+legend{
+  font-size: var(--font-md);
+  font-weight: bold;
 }
 
+
 @media screen and (min-width: 600px) {
-  .modal-crud_content form {
+  .modal-crud_content .inputs {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 50px;
   }
 
-
-
-  .modal-crud_content form input{
-    max-width: 190px;
+  .modal-crud_content form input {
+    max-width: 170px;
   }
 }
 
@@ -826,11 +833,11 @@ form .photo {
   margin-bottom: var(--space-md);
 }
 
-form .birday{
+form .birday {
   width: 100%;
 }
 
-.birday legend{
+.birday legend {
   font-size: var(--font-md);
   font-weight: bold;
 }
@@ -838,7 +845,10 @@ form .birday{
 .birday #nascimento {
   color: var(--color-lightWhite);
   max-width: 295px;
-  
+}
+
+#nome{
+  min-width: 300px;
 }
 
 .custum-file-upload {
@@ -891,6 +901,15 @@ form .birday{
   flex-wrap: wrap;
   gap: 10px;
 }
+.personal div{
+  width: 100%;
+}
+
+@media(min-width: 600px){
+  .personal div{
+    width: fit-content;
+  }
+}
 
 .personal-header {
   width: 100%;
@@ -900,13 +919,67 @@ form .birday{
 }
 
 .ativo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
   font-size: var(--font-md);
   font-weight: bold;
 }
 
-.ativo input {
-  border: 1px solid red;
+.ativo legend {
+  margin-bottom: var(--space-sm);
+}
+
+#telefone{
+  min-width: 270px;
+}
+
+#cep{
+  min-width: 250px;
+
+}
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  transition: all 0.3s;
+  margin: 5px 0;
+}
+
+.divider span {
+  height: 3px;
+}
+
+.divider span:first-child,
+.divider span:last-child {
+  width: 50%;
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+}
+
+.divider span:first-child {
+  background-image: linear-gradient(90deg, transparent, var(--color-darkBlue));
+}
+
+.divider span:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-darkBlue);
+  padding: 0px 10px 0px 10px;
+}
+
+.divider span:last-child {
+  background-image: linear-gradient(90deg, var(--color-darkBlue), transparent);
+}
+
+.address {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+
+@media screen and (min-width: 900px) {
+  .address .rua #endereco {
+    min-width: 355px;
+  }
 }

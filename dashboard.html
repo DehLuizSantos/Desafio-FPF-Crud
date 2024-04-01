@@ -103,12 +103,14 @@
           <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
         </div>
       </div>
+    </div>
 
-      <!-- Modal Cadastrar/Editar -->
-      <div id="modal-crud">
-        <div class="modal-crud_content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <form action="" class="form">
+    <!-- Modal Cadastrar/Editar -->
+    <div id="modal-crud">
+      <div class="modal-crud_content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form action="" class="form" id="crud-form">
+          <div class="inputs">
             <div class="photo">
               <label class="custum-file-upload" for="file">
                 <div class="icon">
@@ -117,42 +119,91 @@
                 <div class="text">
                   <span>Clique aqui para enviar a imagem</span>
                 </div>
-                <input type="file" id="file">
+                <input type="file" id="file" name="file">
               </label>
             </div>
             <div class="personal">
               <div class="personal-header">
                 <div class="ativo">
-                  <legend>Ativo</legend>
-                  <input type="checkbox" placeholder="Status" id="status" />
+                  <legend>Status</legend>
+                  <input type="checkbox" placeholder="Status" id="status" name="status" />
                 </div>
                 <div class="birday">
                   <legend>Nascimento</legend>
-                  <input type="date" placeholder="Nascimento" id="nascimento" class="input" />
+                  <input type="date" placeholder="Nascimento" id="nascimento" class="input" name="nascimento" />
                 </div>
               </div>
-              <input type="text" placeholder="Nome" id="nome" class="input" />
-              <input type="text" placeholder="CPF" id="cpf" class="input" />
-              <input type="text" placeholder="Idade" id="idade" class="input" />
-              <input type="text" placeholder="EMAIL" id="email" class="input" />
-              <input type="text" placeholder="Telefone" id="telefone" class="input" />
-              <input maxlength="9" type="text" placeholder="Cep" id="cep" class="input" onchange="formatGetAddressCep()"
-                oninput="formatarCEP(this)" />
-              <div class="divider"></div>
-              <div class="address"></div>
+              <div class="nome">
+                <legend>Nome</legend>
+                <input type="text" placeholder="Nome" id="nome" class="input" name="nome" />
+              </div>
+              <div class="cpf">
+                <legend>CPF</legend>
+                <input type="text" placeholder="CPF" id="cpf" class="input" name="cpf" oninput="formatarCPF(this)"
+                  maxlength="14" />
+              </div>
+              <div class="idade">
+                <legend>Idade</legend>
+                <input type="number" placeholder="Idade" id="idade" class="input" name="idade" />
+              </div>
+              <div class="email">
+                <legend>Email</legend>
+                <input type="email" placeholder="EMAIL" id="email" class="input" name="email" />
+              </div>
+              <div class="telefone">
+                <legend>Telefone</legend>
+                <input type="text" placeholder="Telefone" id="telefone" class="input" name="telefone" />
+              </div>
+              <div class="cep">
+                <legend>CEP</legend>
+                <input maxlength="9" type="text" name='cep' placeholder="Cep" id="cep" class="input"
+                  onchange="formatGetAddressCep()" oninput="formatarCEP(this)" />
+              </div>
+
+              <span class="divider anime-opacity">
+                <span></span><span><i class="fas fa-code"></i></span><span></span>
+              </span>
+
+              <div class="address">
+                <div class="rua">
+                  <legend>Rua</legend>
+                  <input name="rua" type="text" id="endereco" class="input" placeholder="Rua">
+                </div>
+                <div class="numero">
+
+                  <legend>Número</legend>
+                  <input type="text" name="numero" id="numero" class="input" placeholder="Número">
+                </div>
+                <div class="complemento">
+                  <legend>Complemento</legend>
+                  <input name="complemento" type="text" id="complemento" class="input" placeholder="Complemento">
+                </div>
+                <div class="bairro">
+                  <legend>Bairro</legend>
+                  <input name="bairro" type="text" name="bairro" id="bairro" class="input" placeholder="Bairro">
+                </div>
+                <div class="cidade">
+                  <legend>Cidade</legend>
+                  <input type="text" id="cidade" name="cidade" class="input" placeholder="Cidade">
+                </div>
+              </div>
             </div>
-
-
-          </form>
-
-          <div class="buttons">
-            <button class="red" onclick="closeModal()">CANCELAR</button>
-            <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
           </div>
-        </div>
+          <div class="buttons">
+            <button class="red" type="button" onclick="closeModal()">CANCELAR</button>
+            <button id="send-register" class="purple" type="submit">CONFIRMAR</button>
+          </div>
+        </form>
+
+
       </div>
+    </div>
+  </div>
+
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="src/js/dashboard.js"></script>
+<script src="src/js/utils.js"></script>
 
 </html>
