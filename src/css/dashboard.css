@@ -1,20 +1,18 @@
-
-
 /* Loading Responsive
  *****************************************************************************
 */
 
-#loading{
+#loading {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.9); 
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 5;
   width: 100%;
   height: 100%;
   text-align: center;
   align-items: center;
-  display:none;
+  display: none;
   overflow: none;
-  
+
 }
 
 .loader {
@@ -95,6 +93,7 @@
     height: 40px;
   }
 }
+
 /* Content Responsive
  *****************************************************************************
 */
@@ -291,8 +290,10 @@
   border-right: 1px solid var(--color-purpleUltraLight);
 }
 
-.user-options img{
+.user-options img {
   height: 90px;
+  width: 90px;
+  object-fit: fill;
   border-radius: 5px;
 }
 
@@ -502,8 +503,8 @@ footer {
   color: var(--color-darkBlue);
 }
 
-@media(min-width: 600px){
-  .modal-crud_content{
+@media(min-width: 600px) {
+  .modal-crud_content {
     top: 50%;
   }
 }
@@ -513,7 +514,8 @@ footer {
   height: 100%;
   width: 100%;
 }
-legend{
+
+legend {
   font-size: var(--font-md);
   font-weight: bold;
 }
@@ -553,9 +555,9 @@ form .birday {
   max-width: 295px;
 }
 
-@media(min-width: 600px){
+@media(min-width: 600px) {
 
-  #nome{
+  #nome {
     min-width: 300px;
   }
 }
@@ -610,12 +612,13 @@ form .birday {
   flex-wrap: wrap;
   gap: 10px;
 }
-.personal div{
+
+.personal div {
   width: 100%;
 }
 
-@media(min-width: 600px){
-  .personal div{
+@media(min-width: 600px) {
+  .personal div {
     width: fit-content;
   }
 }
@@ -636,14 +639,15 @@ form .birday {
   margin-bottom: var(--space-sm);
 }
 
-#telefone{
+#telefone {
   min-width: 270px;
 }
 
-#cep{
+#cep {
   min-width: 250px;
 
 }
+
 .divider {
   display: flex;
   align-items: center;
