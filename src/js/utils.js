@@ -1,3 +1,4 @@
+/* Faz requisição e formata endereço de acordo com o CEP digitado */
 async function formatGetAddressCep() {
   try {
     const cep = document.getElementById("cep").value.trim().replace("-", "");
@@ -42,6 +43,7 @@ async function formatGetAddressCep() {
   }
 }
 
+/* Mascara CEP */
 function formatarCEP(input) {
   let valor = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
 
@@ -52,6 +54,7 @@ function formatarCEP(input) {
   input.value = valor; // Atualiza o valor do campo
 }
 
+/* Mascara CPF */
 function formatarCPF(input) {
   let valor = input.value.replace(/\D/g, ""); // Remove caracteres não numéricos
 
@@ -68,10 +71,12 @@ function formatarCPF(input) {
   input.value = valor; // Atualiza o valor do campo
 }
 
+/* Redireciona pro login */
 function redirectToLogin() {
   window.location.href = "/";
 }
 
+/* Abre e fecha o navbar */
 function toggleNavbar() {
   const checkbox = document.getElementById("checkbox");
   const navbar = document.getElementById("navbar");

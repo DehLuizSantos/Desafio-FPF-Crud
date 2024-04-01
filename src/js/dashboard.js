@@ -1,9 +1,11 @@
+/* Variaveis globais */
 var userId = 0;
 var nome = "";
 var allUsers = localStorage.getItem("users");
 var users = JSON.parse(allUsers);
 var user = null;
 
+/* Loop usuários criando componentes na tela */
 function renderAllUsers(usersToRender) {
   const userListDiv = document.getElementById("users-wrapper");
   /* Renderiza os usuários dinamiamente */
@@ -133,10 +135,12 @@ function renderAllUsers(usersToRender) {
   });
 }
 
+/* Callback para renderizar usuário */
 function attUsers(usersToRender) {
   renderAllUsers(usersToRender);
 }
 
+/* Função verificar "database" */
 function getUsersFromLocalStorage() {
   const allUsers = localStorage.getItem("users");
   return allUsers ? JSON.parse(allUsers) : [];
@@ -152,6 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
   renderUsersOnPage();
 });
 
+/* Abre modal deleção */
 function openModalDelete(id, userName) {
   userId = id;
   nome = userName;
@@ -165,6 +170,7 @@ function openModalDelete(id, userName) {
   spanName.textContent = nome;
 }
 
+/* Fecha modal */
 function closeModal() {
   const modalDelete = document.getElementsByClassName("modal-delete_content");
   const modalCrud = document.getElementsByClassName("modal-crud_content");
@@ -190,6 +196,7 @@ function closeModal() {
   document.getElementById("status").value = "on";
 }
 
+/* Confirmação de deleção */
 function confirmDeleteUser() {
   const allNewUsers = users.filter(user => user.id !== userId);
   const allUserToSend = JSON.stringify(allNewUsers);
@@ -200,6 +207,7 @@ function confirmDeleteUser() {
   closeModal();
 }
 
+/* Abre modal formulario */
 function openModalRegisterEdit(id) {
   userId = id;
   if (id) {
@@ -227,6 +235,7 @@ function openModalRegisterEdit(id) {
   modal[0].style.opacity = 1;
 }
 
+/* Submit formulario add/edit */
 document.getElementById("crud-form").addEventListener("submit", event => {
   event.preventDefault(); // Impede que o formulário seja por parametro URL
 
@@ -281,4 +290,21 @@ document.getElementById("crud-form").addEventListener("submit", event => {
   attUsers(newUser);
 
   closeModal();
+});
+
+/* Filtra usuário de acordo com o que está na tela. */
+document.getElementById("search-user").addEventListener("input", event => {
+  const filtro = event.target.value.toLowerCase(); // Obtém o texto digitado pelo usuário e converte para minúsculas
+
+  // Remove todos os cards atuais
+  const userListDiv = document.getElementById("users-wrapper");
+  userListDiv.innerHTML = "";
+
+  // Filtra os usuários com base no texto digitado pelo usuário
+  const usersFiltrados = users.filter(user => {
+    return user.nome.toLowerCase().includes(filtro); // Verifica se o nome do usuário inclui o texto do filtro
+  });
+
+  // Renderiza apenas os cards filtrados
+  renderAllUsers(usersFiltrados);
 });
