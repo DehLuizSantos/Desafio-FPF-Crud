@@ -46,18 +46,10 @@ This project was made using the follow technologies:
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 
 
-# :construction_worker: How to run
-
-**You need to install [Node.js](https://nodejs.org/en/download/) and [Yarn](https://yarnpkg.com/) first, then:**
-
 ### Run Aplication
 
-```bash
-yarn dev - start aplication on ReactJS
-
-````
-
-Open [http://localhost:5173/](http://localhost:5173/) with your browser to see the result.
+1) Clone the repository,
+2) Run de index file, make an account, and login.
 <br>
 
 Made with love by [André Luiz Santos](https://github.com/DehLuizSantos) 🚀
