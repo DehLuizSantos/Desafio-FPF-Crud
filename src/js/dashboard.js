@@ -22,7 +22,7 @@ function renderAllUsers(usersToRender) {
     userOptions.classList.add("user-options");
 
     const logoImg = document.createElement("img");
-    logoImg.src = user.logoSrc || "/src/assets/icons/user.svg"; // URL da imagem do usuário
+    logoImg.src = user.photo || "/src/assets/img/user-default.png"; // URL da imagem do usuário
     logoImg.alt = "Logo"; // Texto alternativo para a imagem
 
     const editButton = document.createElement("button");
@@ -54,6 +54,7 @@ function renderAllUsers(usersToRender) {
 
     /* Informações basicas */
 
+    /* Email */
     const emailDiv = document.createElement("div");
     emailDiv.classList.add("info-wrapper");
     const emailLabel = document.createElement("span");
@@ -67,12 +68,45 @@ function renderAllUsers(usersToRender) {
     emailDiv.appendChild(emailLabel);
     emailDiv.appendChild(emailSpan);
 
+    /* Email fim */
+
+    /* Cpf  */
+    const cpfDiv = document.createElement("div");
+    cpfDiv.classList.add("info-wrapper");
+    const cpfLabel = document.createElement("span");
+
+    cpfLabel.classList.add("info");
+    cpfLabel.textContent = "CPF:";
+
+    const cpfSpan = document.createElement("span");
+    cpfSpan.textContent = user.cpf; // cpf do usuário
+
+    cpfDiv.appendChild(cpfLabel);
+    cpfDiv.appendChild(cpfSpan);
+    /* Cpf fim  */
+
+    /* telefone  */
+    const telefoneDiv = document.createElement("div");
+    telefoneDiv.classList.add("info-wrapper");
+    const telefoneLabel = document.createElement("span");
+
+    telefoneLabel.classList.add("info");
+    telefoneLabel.textContent = "TEL:";
+
+    const telefoneSpan = document.createElement("span");
+    telefoneSpan.textContent = user.telefone; // telefone do usuário
+
+    telefoneDiv.appendChild(telefoneLabel);
+    telefoneDiv.appendChild(telefoneSpan);
+    /* Cpf fim  */
+
     // Adicione as outras informações do usuário aqui
     // Exemplo: telefone, status, idade, CPF
 
     userInfos.appendChild(nameDiv);
     userInfos.appendChild(emailDiv);
-
+    userInfos.appendChild(cpfDiv);
+    userInfos.appendChild(telefoneDiv);
     userTop.appendChild(userOptions);
     userTop.appendChild(userInfos);
 
@@ -130,6 +164,7 @@ function closeModal() {
   const modalCrud = document.getElementsByClassName("modal-crud_content");
   const modal = document.getElementsByClassName("modal");
   modal[0].style.zIndex = -1;
+  modal[0].style.opacity = 0;
   modalDelete[0].style.opacity = 0;
   modalDelete[0].style.zIndex = -1;
   modalCrud[0].style.opacity = 0;
@@ -143,13 +178,11 @@ function confirmDeleteUser() {
   users = allNewUsers;
   const userContainerId = document.getElementById(id);
   userContainerId.remove();
-  console.log(userContainerId);
-
   closeModal();
 }
 
-function openModalRegisterEdit() {
-  id = null;
+function openModalRegisterEdit(id) {
+  id = id;
   const modalCrud = document.getElementsByClassName("modal-crud_content");
   const modal = document.getElementsByClassName("modal");
   modalCrud[0].style.opacity = 1;
