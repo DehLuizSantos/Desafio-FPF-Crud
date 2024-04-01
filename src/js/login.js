@@ -49,7 +49,8 @@ document.getElementById("register-form").addEventListener("submit", event => {
   const userData = {
     nome: formData.get("register-name"),
     email: formData.get("register-email"),
-    password: formData.get("register-password")
+    password: formData.get("register-password"),
+    id: Math.floor(Math.random() * 1001),
   };
 
   const usersSession = localStorage.getItem("users") || "[]";
