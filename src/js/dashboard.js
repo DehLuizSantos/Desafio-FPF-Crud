@@ -238,11 +238,11 @@ function openModalRegisterEdit(id) {
     document.getElementById("nascimento").value = userFiltered.nascimento;
     document.getElementById("status").value = userFiltered.status;
     document.getElementById("cep").value = userFiltered.cep;
-    document.getElementById("endereco").value = userFiltered.endereco.rua;
-    document.getElementById("numero").value = userFiltered.endereco.numero;
+    document.getElementById("endereco").value = userFiltered.endereco.rua ?? '';
+    document.getElementById("numero").value = userFiltered.endereco.numero ?? '';
     document.getElementById("complemento").value =
-      userFiltered.endereco.complemento;
-    document.getElementById("cidade").value = userFiltered.endereco.cidade;
+      userFiltered.endereco.complemento ?? '';
+    document.getElementById("cidade").value = userFiltered.endereco.cidade ?? '';
   }
   const modalCrud = document.getElementsByClassName("modal-crud_content");
   const modal = document.getElementsByClassName("modal");
