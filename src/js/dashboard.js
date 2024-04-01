@@ -1,7 +1,8 @@
-var id = 0;
+var userId = 0;
 var nome = "";
 var allUsers = localStorage.getItem("users");
 var users = JSON.parse(allUsers);
+var user = null;
 
 function renderAllUsers(usersToRender) {
   const userListDiv = document.getElementById("users-wrapper");
@@ -25,9 +26,13 @@ function renderAllUsers(usersToRender) {
     logoImg.src = user.photo || "/src/assets/img/user-default.png"; // URL da imagem do usuário
     logoImg.alt = "Logo"; // Texto alternativo para a imagem
 
+    /* Botões */
     const editButton = document.createElement("button");
     editButton.classList.add("purple");
     editButton.textContent = "EDITAR";
+    editButton.addEventListener("click", function() {
+      openModalRegisterEdit(user.id);
+    });
 
     const deleteButton = document.createElement("button");
     deleteButton.classList.add("red");
@@ -48,6 +53,7 @@ function renderAllUsers(usersToRender) {
     nameDiv.classList.add("name");
 
     const nameHeading = document.createElement("h3");
+    nameHeading.id = "nome-" + user.id;
     nameHeading.textContent = user.nome; // Nome do usuário
 
     nameDiv.appendChild(nameHeading);
@@ -63,6 +69,7 @@ function renderAllUsers(usersToRender) {
     emailLabel.textContent = "EMAIL:";
 
     const emailSpan = document.createElement("span");
+    emailSpan.id = "email-" + user.id;
     emailSpan.textContent = user.email; // Email do usuário
 
     emailDiv.appendChild(emailLabel);
@@ -79,6 +86,7 @@ function renderAllUsers(usersToRender) {
     cpfLabel.textContent = "CPF:";
 
     const cpfSpan = document.createElement("span");
+    cpfSpan.id = "cpf-" + user.id;
     cpfSpan.textContent = user.cpf; // cpf do usuário
 
     cpfDiv.appendChild(cpfLabel);
@@ -94,14 +102,14 @@ function renderAllUsers(usersToRender) {
     telefoneLabel.textContent = "TEL:";
 
     const telefoneSpan = document.createElement("span");
+    telefoneSpan.id = "telefone-" + user.id;
     telefoneSpan.textContent = user.telefone; // telefone do usuário
 
     telefoneDiv.appendChild(telefoneLabel);
     telefoneDiv.appendChild(telefoneSpan);
     /* Cpf fim  */
 
-    // Adicione as outras informações do usuário aqui
-    // Exemplo: telefone, status, idade, CPF
+    /* Ordem de renderização das informações */
 
     userInfos.appendChild(nameDiv);
     userInfos.appendChild(emailDiv);
@@ -110,6 +118,7 @@ function renderAllUsers(usersToRender) {
     userTop.appendChild(userOptions);
     userTop.appendChild(userInfos);
 
+    /* Footer */
     const userFooter = document.createElement("div");
     userFooter.classList.add("user-footer");
 
@@ -117,12 +126,9 @@ function renderAllUsers(usersToRender) {
     moreInfoButton.textContent = "MAIS INFORMAÇÕES";
 
     userFooter.appendChild(moreInfoButton);
-
     userWrapper.appendChild(userTop);
     userWrapper.appendChild(userFooter);
-
     userContainer.appendChild(userWrapper);
-
     userListDiv.appendChild(userContainer);
   });
 }
@@ -146,8 +152,8 @@ document.addEventListener("DOMContentLoaded", function() {
   renderUsersOnPage();
 });
 
-function openModalDelete(userId, userName) {
-  id = userId;
+function openModalDelete(id, userName) {
+  userId = id;
   nome = userName;
   const modalDelete = document.getElementsByClassName("modal-delete_content");
   const modal = document.getElementsByClassName("modal");
@@ -169,20 +175,50 @@ function closeModal() {
   modalDelete[0].style.zIndex = -1;
   modalCrud[0].style.opacity = 0;
   modalCrud[0].style.zIndex = -1;
+  /* Limpa o formulario */
+  document.getElementById("nome").value = "";
+  document.getElementById("cpf").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("idade").value = "";
+  document.getElementById("telefone").value = "";
+  document.getElementById("cep").value = "";
+  document.getElementById("endereco").value = "";
+  document.getElementById("numero").value = "";
+  document.getElementById("complemento").value = "";
+  document.getElementById("cidade").value = "";
+  document.getElementById("nascimento").value = "";
+  document.getElementById("status").value = "on";
 }
 
 function confirmDeleteUser() {
-  const allNewUsers = users.filter(user => user.id !== id);
+  const allNewUsers = users.filter(user => user.id !== userId);
   const allUserToSend = JSON.stringify(allNewUsers);
   localStorage.setItem("users", allUserToSend);
   users = allNewUsers;
-  const userContainerId = document.getElementById(id);
+  const userContainerId = document.getElementById(userId);
   userContainerId.remove();
   closeModal();
 }
 
 function openModalRegisterEdit(id) {
-  id = id;
+  userId = id;
+  if (id) {
+    /* Coloca os dados do usuário clicado */
+    const userFiltered = users.find(user => user.id === id);
+    document.getElementById("nome").value = userFiltered.nome;
+    document.getElementById("cpf").value = userFiltered.cpf;
+    document.getElementById("email").value = userFiltered.email;
+    document.getElementById("idade").value = userFiltered.idade;
+    document.getElementById("telefone").value = userFiltered.telefone;
+    document.getElementById("nascimento").value = userFiltered.nascimento;
+    document.getElementById("status").value = userFiltered.status;
+    document.getElementById("cep").value = userFiltered.cep;
+    document.getElementById("endereco").value = userFiltered.endereco.rua;
+    document.getElementById("numero").value = userFiltered.endereco.numero;
+    document.getElementById("complemento").value =
+      userFiltered.endereco.complemento;
+    document.getElementById("cidade").value = userFiltered.endereco.cidade;
+  }
   const modalCrud = document.getElementsByClassName("modal-crud_content");
   const modal = document.getElementsByClassName("modal");
   modalCrud[0].style.opacity = 1;
@@ -203,7 +239,7 @@ document.getElementById("crud-form").addEventListener("submit", event => {
     idade: formData.get("idade"),
     email: formData.get("email"),
     telefone: formData.get("telefone"),
-    id: Math.floor(Math.random() * 1001),
+    id: userId ? userId : Math.floor(Math.random() * 1001),
     cep: formData.get("cep"),
     photo: formData.get("photo"),
     endereco: {
@@ -214,6 +250,30 @@ document.getElementById("crud-form").addEventListener("submit", event => {
       complemento: formData.get("complemento")
     }
   };
+
+  /* Editar */
+  if (userId) {
+    document.getElementById(`nome-${userId}`).textContent = registerData.nome;
+    document.getElementById(`telefone-${userId}`).textContent =
+      registerData.telefone;
+    document.getElementById(`cpf-${userId}`).textContent = registerData.cpf;
+    document.getElementById(`email-${userId}`).textContent = registerData.email;
+
+    const filteredUser = users.map(user => {
+      if (user["id"] === userId) {
+        return { ...user, ...registerData };
+      } else {
+        return user;
+      }
+    });
+    users = filteredUser;
+    localStorage.setItem("users", JSON.stringify(filteredUser));
+    userId = null;
+    closeModal();
+    return;
+  }
+
+  /* Adicionar novo */
   const newUsers = [...users, registerData];
   const newUser = [registerData];
   localStorage.setItem("users", JSON.stringify(newUsers));

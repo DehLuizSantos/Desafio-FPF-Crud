@@ -845,8 +845,11 @@ form .birday {
   max-width: 295px;
 }
 
-#nome{
-  min-width: 300px;
+@media(min-width: 600px){
+
+  #nome{
+    min-width: 300px;
+  }
 }
 
 .custum-file-upload {
