@@ -11,13 +11,14 @@
     rel="stylesheet" />
   <link preload rel="shortcut icon" href="./src/assets/img/logo-fpf.png" type="image/x-icon" />
   <link preload rel="stylesheet" href="src/css/style.css" />
+  <link preload rel="stylesheet" href="src/css/template.css" />
   <link preload rel="stylesheet" href="src/css/dashboard.css" />
 </head>
 
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar hidden" id="navbar">
     <ul class="navbar-links">
       <li>
         <a href="#">
@@ -68,37 +69,152 @@
   </header>
 
   <!-- Content -->
-  <div class="content">
+  <div class="content open">
     <div class="container">
       <div class="content-header">
         <h1>Usuários</h1>
-        <button class="button-cadastrar">CADASTRAR NOVO</button>
+        <button class="button-cadastrar" onclick="openModalRegisterEdit(null)"><span>CADASTRAR</span></button>
       </div>
 
       <!-- Search -->
       <div class="content-filter">
-        <input placeholder="Pesquisar" class="input" name="text" type="text">
+        <input placeholder="Pesquisar" class="input" name="text" id="search-user" type="text">
       </div>
 
       <!-- Render all users inside this div-->
       <div class="users-wrapper" id="users-wrapper"></div>
+      <!-- Footer -->
+      <footer>
+        <h4>Todos direitos reservados © André Luiz Santos</h4>
+      </footer>
     </div>
   </div>
   </div>
 
-  <!-- Modal Delete -->
-  <div id="modal-delete" class="modal">
-    <div class="modal-delete_content">
-      <span class="close" onclick="closeModalDelete()">&times;</span>
-      <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
 
-      <div class="buttons">
-        <button class="red">CANCELAR</button>
-        <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
+  <!-- Modal Delete -->
+  <div class="modal">
+    <div id="modal-delete">
+      <div class="modal-delete_content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Tem certeza que deseja deletar o usuário <span id="name"></span>.</p>
+
+        <div class="buttons">
+          <button class="red" onclick="closeModal()">CANCELAR</button>
+          <button class="purple" onclick="confirmDeleteUser()">CONFIRMAR</button>
+        </div>
       </div>
     </div>
 
+    <!-- Modal Cadastrar/Editar -->
+    <div id="modal-crud">
+      <div class="modal-crud_content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form action="" class="form" id="crud-form">
+          <div class="inputs">
+            <div class="photo">
+              <label class="custum-file-upload" for="file">
+                <div class="icon">
+                  <img src="/src/assets/icons/download.svg" alt="download imagem">
+                </div>
+                <div class="text">
+                  <span>Clique aqui para enviar a imagem</span>
+                </div>
+                <input type="file" id="file" name="file">
+              </label>
+            </div>
+            <div class="personal">
+              <div class="personal-header">
+                <div class="ativo">
+                  <legend>Status</legend>
+                  <span>ativo</span>
+                  <input type="checkbox" placeholder="Status" id="status" name="status" />
+                </div>
+                <div class="birday">
+                  <legend>Nascimento</legend>
+                  <input type="date" placeholder="Nascimento" id="nascimento" class="input" name="nascimento" />
+                </div>
+              </div>
+              <div class="nome">
+                <legend>Nome</legend>
+                <input maxlength="18" type="text" placeholder="Nome" id="nome" class="input" name="nome" />
+              </div>
+              <div class="cpf">
+                <legend>CPF</legend>
+                <input type="text" placeholder="CPF" id="cpf" class="input" name="cpf" oninput="formatarCPF(this)"
+                  maxlength="14" />
+              </div>
+              <div class="idade">
+                <legend>Idade</legend>
+                <input type="number" placeholder="Idade" id="idade" class="input" name="idade" />
+              </div>
+              <div class="email">
+                <legend>Email</legend>
+                <input type="email" placeholder="EMAIL" id="email" class="input" name="email" />
+              </div>
+              <div class="telefone">
+                <legend>Telefone</legend>
+                <input type="text" placeholder="Telefone" id="telefone" class="input" name="telefone" />
+              </div>
+              <div class="cep">
+                <legend>CEP</legend>
+                <input maxlength="9" type="text" name='cep' placeholder="Cep" id="cep" class="input"
+                  onchange="formatGetAddressCep()" oninput="formatarCEP(this)" />
+              </div>
+
+              <span class="divider anime-opacity">
+                <span></span><span><i class="fas fa-code"></i></span><span></span>
+              </span>
+
+              <div class="address">
+                <div class="rua">
+                  <legend>Rua</legend>
+                  <input name="rua" type="text" id="endereco" class="input" placeholder="Rua">
+                </div>
+                <div class="numero">
+
+                  <legend>Número</legend>
+                  <input type="text" name="numero" id="numero" class="input" placeholder="Número">
+                </div>
+                <div class="complemento">
+                  <legend>Complemento</legend>
+                  <input name="complemento" type="text" id="complemento" class="input" placeholder="Complemento">
+                </div>
+                <div class="bairro">
+                  <legend>Bairro</legend>
+                  <input name="bairro" type="text" name="bairro" id="bairro" class="input" placeholder="Bairro">
+                </div>
+                <div class="cidade">
+                  <legend>Cidade</legend>
+                  <input type="text" id="cidade" name="cidade" class="input" placeholder="Cidade">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="buttons">
+            <button class="red" type="button" onclick="closeModal()">CANCELAR</button>
+            <button id="send-register" class="purple" type="submit">CONFIRMAR</button>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="loader">
+      <div class="justify-content-center jimu-primary-loading"></div>
+    </div>
+  </div>
+
+
+
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="src/js/utils.js"></script>
 <script src="src/js/dashboard.js"></script>
 
 </html>
